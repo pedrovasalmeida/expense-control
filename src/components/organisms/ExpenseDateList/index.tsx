@@ -13,8 +13,8 @@ export function ExpenseDateList() {
   const renderDividerComponent = () => <Divider />
 
   const renderItems = ({ item }: any) => (
-    <TouchableOpacity key={item.id} onPress={() => handleSelectMonth(item.id)}>
-      <DateContainer key={item.id} isSelected={selectedMonth === item.id}>
+    <TouchableOpacity onPress={() => handleSelectMonth(item.id)}>
+      <DateContainer isSelected={selectedMonth === item.id}>
         <Text>{item.id}</Text>
         <DateText>{new Date().getFullYear()}</DateText>
       </DateContainer>

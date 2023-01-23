@@ -1,5 +1,6 @@
 import { ExpenseListDivider } from '@/components/atoms/ExpenseListDivider'
 import { ExpenseCard } from '@/components/molecules/ExpenseCard'
+import { Fragment } from 'react'
 import { ExpenseListContainer, Title } from './styles'
 
 interface ExpenseListProps {
@@ -18,10 +19,10 @@ export function ExpenseList({ title, type }: ExpenseListProps) {
       <Title>{title ?? 'Saídas'}</Title>
 
       {dataToRender?.map((item, index, arr) => (
-        <>
-          <ExpenseCard key={item} type={type} />
+        <Fragment key={item}>
+          <ExpenseCard type={type} />
           {index !== arr.length - 1 && <ExpenseListDivider />}
-        </>
+        </Fragment>
       ))}
     </ExpenseListContainer>
   )
