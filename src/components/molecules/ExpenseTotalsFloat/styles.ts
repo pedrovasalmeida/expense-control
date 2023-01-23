@@ -24,6 +24,12 @@ export const TotalText = styled.Text`
   ${baseRegularText}
 `
 
-export const TotalValue = styled.Text`
+interface TotalValueProps {
+  isPositive: boolean
+}
+
+export const TotalValue = styled.Text<TotalValueProps>`
   ${baseBoldText}
+  color: ${({ theme, isPositive }) => (isPositive ? theme.colors.green : theme.colors.red)};
+  text-transform: uppercase;
 `

@@ -24,4 +24,5 @@ export const Text = styled.Text`
 
 export const Value = styled.Text`
   ${baseBoldText}
+  text-transform: uppercase;
 `

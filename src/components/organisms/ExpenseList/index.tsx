@@ -1,3 +1,4 @@
+import { ExpenseListDivider } from '@/components/atoms/ExpenseListDivider'
 import { ExpenseCard } from '@/components/molecules/ExpenseCard'
 import { ExpenseListContainer, Title } from './styles'
 
@@ -16,8 +17,11 @@ export function ExpenseList({ title, type }: ExpenseListProps) {
     <ExpenseListContainer>
       <Title>{title ?? 'Saídas'}</Title>
 
-      {dataToRender?.map(item => (
-        <ExpenseCard key={item} type={type} />
+      {dataToRender?.map((item, index, arr) => (
+        <>
+          <ExpenseCard key={item} type={type} />
+          {index !== arr.length - 1 && <ExpenseListDivider />}
+        </>
       ))}
     </ExpenseListContainer>
   )
