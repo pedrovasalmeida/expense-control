@@ -8,8 +8,8 @@ export function NoConnection() {
   const [isConnected, setIsConnected] = useState(true)
 
   const unsubscribe = NetInfo.addEventListener(state => {
-    console.log('Connection type', state.type)
-    console.log('Is connected?', state.isConnected)
+    console.log('Connection type: ', state.type)
+    console.log('Is phone connected: ', state.isConnected)
 
     if (state.isConnected && !isConnected) {
       setIsConnected(true)

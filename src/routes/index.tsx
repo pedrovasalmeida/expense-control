@@ -10,13 +10,21 @@ import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
+import RNBootSplash from 'react-native-bootsplash'
+
 const renderCreateEntryButtonOnHeader = (props: HeaderButtonProps) => <CreateEntryButton props={props} />
 
 export function Routes() {
   const { colors } = useTheme()
 
+  const hideSplashScreen = () => {
+    setTimeout(() => {
+      RNBootSplash.hide({ fade: true, duration: 2000 })
+    }, 1000)
+  }
+
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={hideSplashScreen}>
       <Navigator
         screenOptions={{
           animation: 'fade',
