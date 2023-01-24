@@ -1,10 +1,17 @@
-import { months } from '@/utils/constants/months'
+import { Calendar } from '@/interfaces/Calendar'
+import { RootState } from '@/store'
 import { useState } from 'react'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { useSelector } from 'react-redux'
 import { Container, DateContainer, DateText, Divider, Text } from './styles'
 
+interface ItemToRender {
+  item: Calendar
+}
+
 export function ExpenseDateList() {
-  const [selectedMonth, setSelectedMonth] = useState('jan')
+  const { dates } = useSelector((state: RootState) => state.calendar)
+  const [selectedMonth, setSelectedMonth] = useState(dates[0].fullDate)
 
   const handleSelectMonth = (month: string) => {
     setSelectedMonth(month)
@@ -12,11 +19,11 @@ export function ExpenseDateList() {
 
   const renderDividerComponent = () => <Divider />
 
-  const renderItems = ({ item }: any) => (
-    <TouchableOpacity onPress={() => handleSelectMonth(item.id)}>
-      <DateContainer isSelected={selectedMonth === item.id}>
-        <Text>{item.id}</Text>
-        <DateText>{new Date().getFullYear()}</DateText>
+  const renderItems = ({ item }: ItemToRender) => (
+    <TouchableOpacity onPress={() => handleSelectMonth(item.fullDate)}>
+      <DateContainer isSelected={selectedMonth === item.fullDate}>
+        <Text>{item.monthShortName}</Text>
+        <DateText>{item.year}</DateText>
       </DateContainer>
     </TouchableOpacity>
   )
@@ -24,12 +31,14 @@ export function ExpenseDateList() {
   return (
     <Container>
       <FlatList
-        data={months}
+        data={dates}
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={renderDividerComponent}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.fullDate}
         renderItem={renderItems}
+        maxToRenderPerBatch={6}
+        initialNumToRender={6}
       />
     </Container>
   )

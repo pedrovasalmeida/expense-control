@@ -8,6 +8,8 @@ import { NoConnection } from '@/components/molecules/NoConnection'
 import { Routes } from '@/routes'
 
 import { theme } from '@/styles/theme'
+import { Provider } from 'react-redux'
+import { store } from '@/store'
 
 export default function App() {
   return (
@@ -20,8 +22,10 @@ export default function App() {
               backgroundColor: theme.colors.background,
             }}
           >
-            <NoConnection />
-            <Routes />
+            <Provider store={store}>
+              <NoConnection />
+              <Routes />
+            </Provider>
             <StatusBar barStyle="light-content" animated />
           </SafeAreaView>
         </SafeAreaProvider>
